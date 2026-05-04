@@ -23,17 +23,21 @@
         <i class="fa-solid fa-xmark"></i>
       </span>
 
-      <!-- LEFT -->
       <span class="nav left" onclick="prevImage()">
         <i class="fa-solid fa-chevron-left"></i>
       </span>
 
-      <!-- IMAGE -->
-      <img id="preview-img" />
+      <!-- NEW CONTAINER -->
+      <div class="image-container">
+        <img id="preview-img" />
+      </div>
 
-      <!-- RIGHT -->
       <span class="nav right" onclick="nextImage()">
         <i class="fa-solid fa-chevron-right"></i>
+      </span>
+
+      <span class="zoom-btn" onclick="toggleZoom()">
+        <i id="zoom-icon" class="fa-solid fa-magnifying-glass-plus"></i>
       </span>
     </div>
 
