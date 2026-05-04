@@ -4,28 +4,45 @@ body {
     background: #111;
 }
 
-/* GRID */
+/* ================= MASONRY GALLERY ================= */
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
+    column-count: 5;
+    column-gap: 10px;
     padding: 10px;
+    margin: 40px;
+    background: #222;
+    border-radius: 8px;
 }
 
+/* Responsive columns */
+@media (max-width: 1000px) {
+    .gallery { column-count: 3; }
+}
+@media (max-width: 700px) {
+    .gallery { column-count: 2; }
+}
+@media (max-width: 500px) {
+    .gallery { column-count: 1; }
+}
+
+/* Images */
 .gallery img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    cursor: pointer;
+    margin-bottom: 10px;
     border-radius: 8px;
+    cursor: pointer;
+
+    display: block;
+    break-inside: avoid;
+
     transition: transform 0.3s ease;
 }
 
 .gallery img:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
-/* FULLSCREEN VIEW */
+/* ================= FULLSCREEN VIEW ================= */
 #preview {
     position: fixed;
     top: 0;
@@ -48,7 +65,7 @@ body {
     align-items: center;
 }
 
-/* IMAGE */
+/* PREVIEW IMAGE */
 #preview img {
     max-width: 100%;
     max-height: 100%;
@@ -63,6 +80,8 @@ body {
 #preview img:active {
     cursor: grabbing;
 }
+
+/* ================= UI CONTROLS ================= */
 
 /* CLOSE BUTTON */
 .close {
