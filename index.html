@@ -17,12 +17,24 @@
       <img src="assets/img4.jpg" onclick="openImage(this)" />
     </div>
 
-    <!-- Fullscreen Preview -->
+    <!-- FULLSCREEN PREVIEW -->
     <div id="preview">
-      <span class="close" onclick="closeImage()"
-        ><i class="fa-solid fa-xmark"></i
-      ></span>
+      <span class="close" onclick="closeImage()">
+        <i class="fa-solid fa-xmark"></i>
+      </span>
+
+      <!-- LEFT -->
+      <span class="nav left" onclick="prevImage()">
+        <i class="fa-solid fa-chevron-left"></i>
+      </span>
+
+      <!-- IMAGE -->
       <img id="preview-img" />
+
+      <!-- RIGHT -->
+      <span class="nav right" onclick="nextImage()">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
     </div>
 
     <script src="script.js"></script>

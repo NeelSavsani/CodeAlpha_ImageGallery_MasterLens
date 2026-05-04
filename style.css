@@ -59,3 +59,27 @@ body {
     color: white;
     cursor: pointer;
 }
+
+/* NAV BUTTONS */
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+}
+
+.nav.left {
+    left: 20px;
+}
+
+.nav.right {
+    right: 20px;
+}
+
+.nav:hover {
+    color: #ccc;
+}
