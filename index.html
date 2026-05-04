@@ -3,20 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <title>MasterLens</title>
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+
     <script
       src="https://kit.fontawesome.com/e05d24f6c7.js"
       crossorigin="anonymous"
     ></script>
   </head>
+
   <body>
-    <div class="gallery">
-      <img src="assets/img1.jpg" onclick="openImage(this)" />
-      <img src="assets/img2.jpg" onclick="openImage(this)" />
-      <img src="assets/img3.jpg" onclick="openImage(this)" />
-      <img src="assets/img4.jpg" onclick="openImage(this)" />
-    </div>
+    <div class="gallery"></div>
 
     <!-- FULLSCREEN PREVIEW -->
     <div id="preview">
@@ -28,7 +25,6 @@
         <i class="fa-solid fa-chevron-left"></i>
       </span>
 
-      <!-- NEW CONTAINER -->
       <div class="image-container">
         <img id="preview-img" />
       </div>

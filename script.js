@@ -1,6 +1,11 @@
-let images = document.querySelectorAll(".gallery img");
+let images = [];
 let currentIndex = 0;
 let isAnimating = false;
+
+const gallery = document.querySelector(".gallery");
+
+// 🔑 ADD YOUR KEY HERE
+const PEXELS_API_KEY = "PueOjJutr5Ez13SsvSvgmOqNohORrFMHqMXEIuuLtM4YLhJcj3u0GUea";
 
 // ELEMENTS
 const preview = document.getElementById("preview");
@@ -13,12 +18,81 @@ let posX = 0;
 let posY = 0;
 let zoomed = false;
 
-// ================= OPEN / CLOSE =================
-function openImage(imgEl) {
-    preview.style.display = "flex";
-    img.src = imgEl.src;
+// ================= LOAD IMAGES =================
+async function loadImages() {
+    gallery.innerHTML = "Loading images...";
 
-    currentIndex = Array.from(images).indexOf(imgEl);
+    try {
+        // 🔥 TRY PEXELS FIRST
+        let allImages = [];
+
+        for (let i = 1; i <= 5; i++) {
+            const res = await fetch(`https://api.pexels.com/v1/curated?page=${i}&per_page=80`, {
+                headers: {
+                    Authorization: PEXELS_API_KEY
+                }
+            });
+
+            const data = await res.json();
+
+            allImages = allImages.concat(
+                data.photos.map(p => p.src.large)
+            );
+        }
+
+        // SHUFFLE + LIMIT
+        images = allImages
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 400);
+
+        renderGallery();
+
+    } catch (error) {
+        console.warn("Pexels failed → switching to Picsum");
+
+        // 🔁 FALLBACK: PICSUM
+        let allImages = [];
+
+        for (let i = 0; i < 5; i++) {
+            let randomPage = Math.floor(Math.random() * 50) + 1;
+
+            const res = await fetch(`https://picsum.photos/v2/list?page=${randomPage}&limit=100`);
+            const data = await res.json();
+
+            allImages = allImages.concat(
+                data.map(img => img.download_url)
+            );
+        }
+
+        images = allImages
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 400);
+
+        renderGallery();
+    }
+}
+
+// ================= RENDER =================
+function renderGallery() {
+    gallery.innerHTML = "";
+
+    images.forEach((url, index) => {
+        const imgEl = document.createElement("img");
+        imgEl.src = url;
+        imgEl.loading = "lazy";
+
+        imgEl.addEventListener("click", () => openImage(index));
+
+        gallery.appendChild(imgEl);
+    });
+}
+
+// ================= OPEN / CLOSE =================
+function openImage(index) {
+    preview.style.display = "flex";
+    currentIndex = index;
+
+    img.src = images[currentIndex];
     resetZoom();
 }
 
@@ -46,7 +120,7 @@ function changeImage() {
     img.style.opacity = 0;
 
     setTimeout(() => {
-        img.src = images[currentIndex].src;
+        img.src = images[currentIndex];
         resetZoom();
         img.style.opacity = 1;
 
@@ -66,14 +140,12 @@ document.addEventListener("keydown", function(e) {
     }
 });
 
-// ================= ZOOM BUTTON =================
+// ================= ZOOM =================
 function toggleZoom() {
     if (!zoomed) {
         scale = 2;
         zoomed = true;
-
-        zoomIcon.classList.remove("fa-magnifying-glass-plus");
-        zoomIcon.classList.add("fa-magnifying-glass-minus");
+        zoomIcon.classList.replace("fa-magnifying-glass-plus", "fa-magnifying-glass-minus");
     } else {
         resetZoom();
     }
@@ -81,7 +153,6 @@ function toggleZoom() {
     updateTransform();
 }
 
-// ================= TRANSFORM =================
 function updateTransform() {
     const maxOffset = 300;
 
@@ -91,20 +162,17 @@ function updateTransform() {
     img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
 }
 
-// ================= RESET =================
 function resetZoom() {
     scale = 1;
     posX = 0;
     posY = 0;
     zoomed = false;
 
-    zoomIcon.classList.remove("fa-magnifying-glass-minus");
-    zoomIcon.classList.add("fa-magnifying-glass-plus");
-
+    zoomIcon.classList.replace("fa-magnifying-glass-minus", "fa-magnifying-glass-plus");
     updateTransform();
 }
 
-// ================= DRAG TO PAN =================
+// ================= DRAG =================
 let isDragging = false;
 let startX = 0;
 let startY = 0;
@@ -134,3 +202,6 @@ document.addEventListener("mouseup", () => {
     isDragging = false;
     img.style.cursor = "grab";
 });
+
+// ================= AUTO LOAD =================
+loadImages();
