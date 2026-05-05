@@ -1,6 +1,5 @@
 :root {
     --header-dark: #000;
-    /* 🔥 solid instead of rgba */
     --header-light: #fff;
     --header-shadow-dark: rgba(0, 0, 0, 0.3);
     --header-shadow-light: rgba(255, 255, 255, 0.3);
