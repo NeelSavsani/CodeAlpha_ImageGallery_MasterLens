@@ -4,8 +4,8 @@ let isAnimating = false;
 
 const gallery = document.querySelector(".gallery");
 
-// 🔑 ADD YOUR KEY HERE
-const PEXELS_API_KEY = "PueOjJutr5Ez13SsvSvgmOqNohORrFMHqMXEIuuLtM4YLhJcj3u0GUea";
+// 🔑 YOUR API KEY
+const PEXELS_API_KEY = "YOUR_API_KEY_HERE";
 
 // ELEMENTS
 const preview = document.getElementById("preview");
@@ -23,15 +23,14 @@ async function loadImages() {
     gallery.innerHTML = "Loading images...";
 
     try {
-        // 🔥 TRY PEXELS FIRST
         let allImages = [];
 
         for (let i = 1; i <= 5; i++) {
             const res = await fetch(`https://api.pexels.com/v1/curated?page=${i}&per_page=80`, {
-                headers: {
-                    Authorization: PEXELS_API_KEY
-                }
+                headers: { Authorization: PEXELS_API_KEY }
             });
+
+            if (!res.ok) throw new Error("Pexels failed");
 
             const data = await res.json();
 
@@ -40,17 +39,15 @@ async function loadImages() {
             );
         }
 
-        // SHUFFLE + LIMIT
         images = allImages
             .sort(() => Math.random() - 0.5)
             .slice(0, 400);
 
         renderGallery();
 
-    } catch (error) {
-        console.warn("Pexels failed → switching to Picsum");
+    } catch {
+        console.warn("Fallback → Picsum");
 
-        // 🔁 FALLBACK: PICSUM
         let allImages = [];
 
         for (let i = 0; i < 5; i++) {
@@ -132,7 +129,7 @@ function changeImage() {
 }
 
 // ================= KEYBOARD =================
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown", (e) => {
     if (preview.style.display === "flex") {
         if (e.key === "ArrowRight") nextImage();
         if (e.key === "ArrowLeft") prevImage();
@@ -172,7 +169,7 @@ function resetZoom() {
     updateTransform();
 }
 
-// ================= DRAG =================
+// ================= DESKTOP DRAG =================
 let isDragging = false;
 let startX = 0;
 let startY = 0;
@@ -203,18 +200,47 @@ document.addEventListener("mouseup", () => {
     img.style.cursor = "grab";
 });
 
+// ================= MOBILE TOUCH =================
+let touchStartX = 0;
+let touchStartY = 0;
+
+// TOUCH START
+img.addEventListener("touchstart", (e) => {
+    if (zoomed) {
+        // PAN MODE
+        isDragging = true;
+        startX = e.touches[0].clientX - posX;
+        startY = e.touches[0].clientY - posY;
+    } else {
+        // SWIPE MODE
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }
+});
+
+// TOUCH MOVE
+img.addEventListener("touchmove", (e) => {
+    if (!zoomed || !isDragging) return;
+
+    posX = e.touches[0].clientX - startX;
+    posY = e.touches[0].clientY - startY;
+
+    updateTransform();
+});
+
+// TOUCH END
+img.addEventListener("touchend", (e) => {
+    if (zoomed) {
+        isDragging = false;
+        return;
+    }
+
+    let touchEndX = e.changedTouches[0].clientX;
+    let diffX = touchStartX - touchEndX;
+
+    if (diffX > 50) nextImage();
+    if (diffX < -50) prevImage();
+});
+
 // ================= AUTO LOAD =================
 loadImages();
-
-let touchStartX = 0;
-
-img.addEventListener("touchstart", (e) => {
-    touchStartX = e.touches[0].clientX;
-});
-
-img.addEventListener("touchend", (e) => {
-    let touchEndX = e.changedTouches[0].clientX;
-
-    if (touchStartX - touchEndX > 50) nextImage();
-    if (touchEndX - touchStartX > 50) prevImage();
-});
