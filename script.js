@@ -205,3 +205,16 @@ document.addEventListener("mouseup", () => {
 
 // ================= AUTO LOAD =================
 loadImages();
+
+let touchStartX = 0;
+
+img.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+});
+
+img.addEventListener("touchend", (e) => {
+    let touchEndX = e.changedTouches[0].clientX;
+
+    if (touchStartX - touchEndX > 50) nextImage();
+    if (touchEndX - touchStartX > 50) prevImage();
+});
