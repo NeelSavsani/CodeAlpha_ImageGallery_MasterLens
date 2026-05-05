@@ -4,7 +4,6 @@ let isAnimating = false;
 
 const gallery = document.querySelector(".gallery");
 
-// 🔑 YOUR API KEY
 const PEXELS_API_KEY = "YOUR_API_KEY_HERE";
 
 // ELEMENTS
@@ -30,7 +29,7 @@ async function loadImages() {
                 headers: { Authorization: PEXELS_API_KEY }
             });
 
-            if (!res.ok) throw new Error("Pexels failed");
+            if (!res.ok) throw new Error();
 
             const data = await res.json();
 
@@ -39,15 +38,10 @@ async function loadImages() {
             );
         }
 
-        images = allImages
-            .sort(() => Math.random() - 0.5)
-            .slice(0, 400);
-
+        images = allImages.sort(() => Math.random() - 0.5).slice(0, 400);
         renderGallery();
 
     } catch {
-        console.warn("Fallback → Picsum");
-
         let allImages = [];
 
         for (let i = 0; i < 5; i++) {
@@ -61,10 +55,7 @@ async function loadImages() {
             );
         }
 
-        images = allImages
-            .sort(() => Math.random() - 0.5)
-            .slice(0, 400);
-
+        images = allImages.sort(() => Math.random() - 0.5).slice(0, 400);
         renderGallery();
     }
 }
@@ -79,7 +70,6 @@ function renderGallery() {
         imgEl.loading = "lazy";
 
         imgEl.addEventListener("click", () => openImage(index));
-
         gallery.appendChild(imgEl);
     });
 }
@@ -87,14 +77,17 @@ function renderGallery() {
 // ================= OPEN / CLOSE =================
 function openImage(index) {
     preview.style.display = "flex";
-    currentIndex = index;
+    document.body.classList.add("no-scroll");
 
+    currentIndex = index;
     img.src = images[currentIndex];
     resetZoom();
 }
 
 function closeImage() {
     preview.style.display = "none";
+    document.body.classList.remove("no-scroll");
+
     isDragging = false;
     img.style.cursor = "grab";
 }
@@ -121,10 +114,7 @@ function changeImage() {
         resetZoom();
         img.style.opacity = 1;
 
-        setTimeout(() => {
-            isAnimating = false;
-        }, 200);
-
+        setTimeout(() => isAnimating = false, 200);
     }, 150);
 }
 
@@ -146,16 +136,10 @@ function toggleZoom() {
     } else {
         resetZoom();
     }
-
     updateTransform();
 }
 
 function updateTransform() {
-    const maxOffset = 300;
-
-    posX = Math.max(Math.min(posX, maxOffset), -maxOffset);
-    posY = Math.max(Math.min(posY, maxOffset), -maxOffset);
-
     img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
 }
 
@@ -169,21 +153,17 @@ function resetZoom() {
     updateTransform();
 }
 
-// ================= DESKTOP DRAG =================
+// ================= DRAG =================
 let isDragging = false;
 let startX = 0;
 let startY = 0;
 
 img.addEventListener("mousedown", (e) => {
     if (!zoomed) return;
-
-    e.preventDefault();
     isDragging = true;
 
     startX = e.clientX - posX;
     startY = e.clientY - posY;
-
-    img.style.cursor = "grabbing";
 });
 
 document.addEventListener("mousemove", (e) => {
@@ -191,56 +171,45 @@ document.addEventListener("mousemove", (e) => {
 
     posX = e.clientX - startX;
     posY = e.clientY - startY;
-
     updateTransform();
 });
 
 document.addEventListener("mouseup", () => {
     isDragging = false;
-    img.style.cursor = "grab";
 });
 
 // ================= MOBILE TOUCH =================
 let touchStartX = 0;
-let touchStartY = 0;
 
-// TOUCH START
 img.addEventListener("touchstart", (e) => {
     if (zoomed) {
-        // PAN MODE
         isDragging = true;
         startX = e.touches[0].clientX - posX;
         startY = e.touches[0].clientY - posY;
     } else {
-        // SWIPE MODE
         touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
     }
 });
 
-// TOUCH MOVE
 img.addEventListener("touchmove", (e) => {
     if (!zoomed || !isDragging) return;
 
     posX = e.touches[0].clientX - startX;
     posY = e.touches[0].clientY - startY;
-
     updateTransform();
 });
 
-// TOUCH END
 img.addEventListener("touchend", (e) => {
     if (zoomed) {
         isDragging = false;
         return;
     }
 
-    let touchEndX = e.changedTouches[0].clientX;
-    let diffX = touchStartX - touchEndX;
+    let diffX = touchStartX - e.changedTouches[0].clientX;
 
     if (diffX > 50) nextImage();
     if (diffX < -50) prevImage();
 });
 
-// ================= AUTO LOAD =================
+// ================= INIT =================
 loadImages();

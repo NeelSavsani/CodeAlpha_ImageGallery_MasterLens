@@ -4,6 +4,11 @@ body {
     background: #111;
 }
 
+/* 🔒 Disable scroll when preview open */
+.no-scroll {
+    overflow: hidden;
+}
+
 /* ================= GALLERY ================= */
 .gallery {
     column-count: 5;
@@ -27,7 +32,7 @@ body {
     }
 }
 
-/* Large phones */
+/* Phones */
 @media (max-width: 700px) {
     .gallery {
         column-count: 2;
@@ -36,10 +41,10 @@ body {
     }
 }
 
-/* Mobile */
-@media (max-width: 500px) {
+/* Very small phones */
+@media (max-width: 400px) {
     .gallery {
-        column-count: 3;
+        column-count: 1;
         margin: 5px;
         padding: 5px;
     }
@@ -51,10 +56,8 @@ body {
     margin-bottom: 10px;
     border-radius: 8px;
     cursor: pointer;
-
     display: block;
     break-inside: avoid;
-
     transition: transform 0.3s ease;
 }
 
@@ -103,8 +106,6 @@ body {
 }
 
 /* ================= CONTROLS ================= */
-
-/* Close button */
 .close {
     position: absolute;
     top: 20px;
@@ -114,7 +115,6 @@ body {
     cursor: pointer;
 }
 
-/* Nav buttons */
 .nav {
     position: absolute;
     top: 50%;
@@ -125,17 +125,14 @@ body {
     padding: 10px;
 }
 
-/* Hide arrows on small screens (use swipe instead later) */
-@media (max-width: 600px) {
-    .nav {
-        display: none;
-    }
-}
-
 .nav.left { left: 15px; }
 .nav.right { right: 15px; }
 
-/* Zoom button */
+/* Hide arrows on mobile */
+@media (max-width: 600px) {
+    .nav { display: none; }
+}
+
 .zoom-btn {
     position: absolute;
     bottom: 25px;
@@ -150,7 +147,7 @@ body {
     border-radius: 50%;
 }
 
-/* Mobile adjustments */
+/* Mobile tweaks */
 @media (max-width: 600px) {
     .zoom-btn {
         bottom: 20px;
