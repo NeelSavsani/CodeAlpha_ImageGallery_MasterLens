@@ -1,5 +1,6 @@
 :root {
-    --header-dark: #000;          /* 🔥 solid instead of rgba */
+    --header-dark: #000;
+    /* 🔥 solid instead of rgba */
     --header-light: #fff;
     --header-shadow-dark: rgba(0, 0, 0, 0.3);
     --header-shadow-light: rgba(255, 255, 255, 0.3);
@@ -34,6 +35,11 @@
     font-family: "Ubuntu", sans-serif;
     font-weight: bold;
     font-size: 1.4rem;
+    color: var(--text-white);
+}
+
+.light-mode .logo {
+    color: var(--text-dark);
 }
 
 .logo img {
@@ -58,6 +64,11 @@
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
     transition: all 0.3s ease;
+    color: var(--text-white);
+}
+
+.light-mode .actions li {
+    color: var(--text-dark);
 }
 
 .actions a {
@@ -111,7 +122,8 @@
         width: 100%;
         height: calc(100vh - 60px);
         flex-direction: column;
-        background: #000; /* 🔥 SOLID BACKGROUND */
+        background: #000;
+        /* 🔥 SOLID BACKGROUND */
         overflow-y: auto;
         opacity: 0;
         transform: translateY(-10px);
@@ -138,11 +150,11 @@
         display: flex;
         align-items: center;
         gap: 14px;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .light-mode .actions li {
-        border-bottom: 1px solid rgba(0,0,0,0.08);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     }
 
     /* ICON */
@@ -165,11 +177,11 @@
 
     /* TAP FEEDBACK */
     .actions li:active {
-        background: rgba(255,255,255,0.1);
+        background: rgba(255, 255, 255, 0.1);
     }
 
     .light-mode .actions li:active {
-        background: rgba(0,0,0,0.1);
+        background: rgba(0, 0, 0, 0.1);
     }
 
     /* REMOVE TAP FLASH */
