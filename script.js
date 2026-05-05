@@ -218,3 +218,7 @@ function toggleTheme(event) {
     event.preventDefault();
     document.body.classList.toggle('light-mode');
 }
+
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("active");
+}

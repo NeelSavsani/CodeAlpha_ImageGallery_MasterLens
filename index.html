@@ -24,12 +24,18 @@
       <div class="logo">
         <img src="assets/MasterEagle.png" alt="Logo" />MasterLens
       </div>
-      <ul class="actions">
-        <li><a href="https://neelsavsani.vercel.app/" target="_blank"><i class="fa-solid fa-circle-user"></i> PortFolio</a></li>
-        <li><i class="fa-solid fa-sun" onclick="toggleTheme(event)" title="Toggle Theme"></i></li>
-        <li><a href="https://www.linkedin.com/in/neel-savsani" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
-        <li><a href="neelsavsani7@google.com" target="_blank"><i class="fa-solid fa-envelope"></i></a></li>
-        <li><a href="https://github.com/NeelSavsani" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+
+      <!-- hamburger -->
+       <div class="hamburger" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+       </div>
+
+      <ul class="actions" id="menu">
+        <li><a href="https://neelsavsani.vercel.app/" target="_blank"><i class="fa-solid fa-circle-user"></i> <span>PortFolio</span></a></li>
+        <li><i class="fa-solid fa-sun" onclick="toggleTheme(event)" title="Toggle Theme"></i> <span>Theme</span></li>
+        <li><a href="https://www.linkedin.com/in/neel-savsani" target="_blank"><i class="fa-brands fa-linkedin-in"></i> <span>LinkedIn</span></a></li>
+        <li><a href="neelsavsani7@google.com" target="_blank"><i class="fa-solid fa-envelope"></i> <span>Email</span></a></li>
+        <li><a href="https://github.com/NeelSavsani" target="_blank"><i class="fa-brands fa-github"></i> <span>GitHub</span></a></li>
       </ul>
     </header>
 
