@@ -38,7 +38,7 @@
 /* Logo */
 .logo {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 900;
     align-items: center;
     text-align: center;
     display: flex;
@@ -49,8 +49,8 @@
 }
 
 .logo img{
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
 }
 
 /* container */
@@ -74,6 +74,7 @@ ul {
     list-style: none;
     padding: 8px 12px;
     border-radius: 8px;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 6px;
