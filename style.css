@@ -13,6 +13,7 @@
     --preview-light: rgba(255,255,255, 0.95);
 }
 
+/* ================= BASE ================= */
 body {
     margin: 0;
     font-family: Arial;
@@ -40,27 +41,22 @@ body.no-scroll .header {
     margin: 40px;
     background: var(--gallery-dark);
     border-radius: 8px;
-    color: var(--text-white);
 }
 
 .light-mode .gallery{
     background: var(--gallery-light);
 }
 
-/* Tablets */
+/* Responsive columns */
 @media (max-width: 1200px) {
     .gallery { column-count: 4; }
 }
-
-/* Small tablets */
 @media (max-width: 900px) {
     .gallery {
         column-count: 3;
         margin: 20px;
     }
 }
-
-/* Phones */
 @media (max-width: 700px) {
     .gallery {
         column-count: 2;
@@ -68,8 +64,6 @@ body.no-scroll .header {
         padding: 8px;
     }
 }
-
-/* Very small phones */
 @media (max-width: 400px) {
     .gallery {
         column-count: 1;
@@ -135,6 +129,8 @@ body.no-scroll .header {
 }
 
 /* ================= CONTROLS ================= */
+
+/* Close */
 .close {
     position: absolute;
     top: 20px;
@@ -144,12 +140,7 @@ body.no-scroll .header {
     cursor: pointer;
 }
 
-.light-mode .close,
-.light-mode .nav,
-.light-mode .zoom-btn{
-    color: var(--text-dark);
-}
-
+/* Nav arrows */
 .nav {
     position: absolute;
     top: 50%;
@@ -157,30 +148,61 @@ body.no-scroll .header {
     font-size: 40px;
     color: var(--text-white);
     cursor: pointer;
-    padding: 10px;
+
+    padding: 12px;
+    border-radius: 50%;
+
+    background: rgba(0,0,0,0.4); /* 🔥 visibility fix */
+    backdrop-filter: blur(5px);
+
+    transition: 0.2s ease;
 }
 
 .nav.left { left: 15px; }
 .nav.right { right: 15px; }
 
-/* Hide arrows on mobile */
-@media (max-width: 600px) {
-    .nav { display: none; }
+.nav:active {
+    transform: translateY(-50%) scale(0.9);
 }
 
+/* Zoom button */
 .zoom-btn {
     position: absolute;
     bottom: 25px;
     right: 25px;
+
     font-size: 22px;
     color: var(--text-white);
     cursor: pointer;
+
     padding: 12px;
     border-radius: 50%;
+
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(5px);
 }
 
-/* Mobile tweaks */
+/* Light mode control colors */
+.light-mode .close,
+.light-mode .nav,
+.light-mode .zoom-btn{
+    color: var(--text-dark);
+}
+
+/* ================= MOBILE ================= */
 @media (max-width: 600px) {
+
+    /* 🔥 SHOW arrows (important fix) */
+    .nav {
+        font-size: 22px;
+        padding: 10px;
+
+        background: rgba(0,0,0,0.6);
+    }
+
+    .nav.left { left: 10px; }
+    .nav.right { right: 10px; }
+
     .zoom-btn {
         bottom: 20px;
         right: 20px;
