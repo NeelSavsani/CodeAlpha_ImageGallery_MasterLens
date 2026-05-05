@@ -179,3 +179,13 @@ ul {
         display: inline-block;
     }
 }
+
+/* Disable hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .actions li:hover {
+        background: none;
+        color: inherit;
+        box-shadow: none;
+        transform: none;
+    }
+}
