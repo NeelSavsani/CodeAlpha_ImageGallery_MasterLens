@@ -39,7 +39,7 @@ body {
 /* Mobile */
 @media (max-width: 500px) {
     .gallery {
-        column-count: 1;
+        column-count: 3;
         margin: 5px;
         padding: 5px;
     }
