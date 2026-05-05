@@ -114,6 +114,15 @@
         padding: 12px 20px;
     }
 
+    .logo {
+        font-size: 1rem;
+    }
+
+    .logo img {
+        width: 30px;
+        height: 30px;
+    }
+
     .hamburger {
         display: block;
         z-index: 1100;

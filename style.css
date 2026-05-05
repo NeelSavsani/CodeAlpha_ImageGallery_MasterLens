@@ -148,14 +148,12 @@ body.no-scroll .header {
     font-size: 40px;
     color: var(--text-white);
     cursor: pointer;
-
     padding: 12px;
     border-radius: 50%;
-
     background: rgba(0,0,0,0.4); /* 🔥 visibility fix */
     backdrop-filter: blur(5px);
-
     transition: 0.2s ease;
+    z-index: 100;
 }
 
 .nav.left { left: 15px; }
@@ -170,14 +168,11 @@ body.no-scroll .header {
     position: absolute;
     bottom: 25px;
     right: 25px;
-
     font-size: 22px;
     color: var(--text-white);
     cursor: pointer;
-
     padding: 12px;
     border-radius: 50%;
-
     background: rgba(0,0,0,0.4);
     backdrop-filter: blur(5px);
 }
@@ -196,7 +191,6 @@ body.no-scroll .header {
     .nav {
         font-size: 22px;
         padding: 10px;
-
         background: rgba(0,0,0,0.6);
     }
 
