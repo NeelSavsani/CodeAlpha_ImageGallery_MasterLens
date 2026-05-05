@@ -1,16 +1,10 @@
 :root {
-    --header-dark: rgba(0, 0, 0, 0.8);
-    --header-light: rgba(255, 255, 255, 0.8);
+    --header-dark: #000;          /* 🔥 solid instead of rgba */
+    --header-light: #fff;
     --header-shadow-dark: rgba(0, 0, 0, 0.3);
     --header-shadow-light: rgba(255, 255, 255, 0.3);
-    --main-dark: #111;
-    --main-light: #eee;
-    --gallery-dark: #222;
-    --gallery-light: #ddd;
     --text-white: #fff;
     --text-dark: #000;
-    --preview-dark: rgba(0, 0, 0, 0.95);
-    --preview-light: rgba(255, 255, 255, 0.95);
 }
 
 /* ================= HEADER ================= */
@@ -21,171 +15,165 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 80px;
+    padding: 12px 80px;
     background: var(--header-dark);
-    backdrop-filter: blur(10px);
     color: var(--text-white);
-    box-shadow: 0 2px 10px var(--header-shadow-dark);
     border-bottom: 1px solid var(--header-shadow-light);
 }
 
 .light-mode .header {
     background: var(--header-light);
-    box-shadow: 0 2px 10px var(--header-shadow-light);
     border-bottom: 1px solid var(--header-shadow-dark);
 }
 
-/* Logo */
+/* ================= LOGO ================= */
 .logo {
-    font-size: 20px;
-    font-weight: 900;
-    align-items: center;
-    text-align: center;
     display: flex;
-    color: var(--text-white);
+    align-items: center;
     gap: 10px;
-    font-size: 1.5rem;
     font-family: "Ubuntu", sans-serif;
+    font-weight: bold;
+    font-size: 1.4rem;
 }
 
 .logo img {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
 }
 
-/* container */
+/* ================= DESKTOP ================= */
 .actions {
-    margin-right: 40px;
-}
-
-ul {
     display: flex;
     align-items: center;
-    padding: 0;
+    gap: 15px;
 }
 
-/* list items */
 .actions li {
-    margin-left: 15px;
-    font-size: 18px;
-    cursor: pointer;
-    color: var(--text-white);
-    font-family: 'Poppins', sans-serif;
     list-style: none;
     padding: 8px 12px;
     border-radius: 8px;
-    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 6px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.light-mode .actions li,
-.light-mode .logo {
-    color: var(--text-dark);
-}
-
-/* links */
 .actions a {
-    color: inherit;
     text-decoration: none;
+    color: inherit;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
-.actions li:hover {
-    background: var(--text-white);
-    color: var(--text-dark);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+@media (hover: hover) and (pointer: fine) {
+    .actions li:hover {
+        background: var(--text-white);
+        color: var(--text-dark);
+    }
+
+    .light-mode .actions li:hover {
+        background: var(--text-dark);
+        color: var(--text-white);
+    }
 }
 
-.actions span{
+.actions span {
     display: none;
 }
 
-.light-mode .actions li:hover {
-    background: var(--text-dark);
-    color: var(--text-white);
-}
-
+/* ================= HAMBURGER ================= */
 .hamburger {
     display: none;
     font-size: 22px;
     cursor: pointer;
 }
 
-
-/* Responsive */
+/* ================= MOBILE ================= */
 @media (max-width: 800px) {
+
     .header {
-        padding: 10px 20px;
+        padding: 12px 20px;
     }
 
     .hamburger {
         display: block;
-        color: var(--text-white);
+        z-index: 1100;
     }
 
-    .light-mode .hamburger {
-        color: var(--text-dark);
-    }
-
+    /* 🔥 FIXED FULL SCREEN MENU */
     .actions {
-        position: absolute;
-        top: 70px;
-        right: 10px;
-        width: 220px;
+        position: fixed;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 60px);
         flex-direction: column;
-        align-items: flex-start;
-        background: var(--header-dark);
-        backdrop-filter: blur(10px);
-        border-radius: 10px;
-        padding: 10px;
-        box-shadow: 0 10px 25px var(--header-shadow-dark);
+        background: #000; /* 🔥 SOLID BACKGROUND */
+        overflow-y: auto;
         opacity: 0;
         transform: translateY(-10px);
         pointer-events: none;
-        transition: 0.3s ease;
+        transition: all 0.25s ease;
+        z-index: 999;
     }
 
     .light-mode .actions {
-        background: var(--header-light);
+        background: #fff;
     }
 
+    /* ACTIVE */
     .actions.active {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
     }
 
+    /* ITEMS */
     .actions li {
         width: 100%;
-        margin: 5px 0;
-        padding: 10px;
+        padding: 18px 20px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 14px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
+    .light-mode .actions li {
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    /* ICON */
     .actions i {
-        width: 20px;
-        margin-right: 10px;
+        width: 22px;
+        font-size: 18px;
         text-align: center;
     }
 
+    /* TEXT */
     .actions span {
         display: inline-block;
+        font-size: 1rem;
     }
-}
 
-/* Disable hover effects on touch devices */
-@media (hover: none) and (pointer: coarse) {
+    /* REMOVE HOVER */
     .actions li:hover {
         background: none;
-        color: inherit;
-        box-shadow: none;
-        transform: none;
+    }
+
+    /* TAP FEEDBACK */
+    .actions li:active {
+        background: rgba(255,255,255,0.1);
+    }
+
+    .light-mode .actions li:active {
+        background: rgba(0,0,0,0.1);
+    }
+
+    /* REMOVE TAP FLASH */
+    .actions li {
+        -webkit-tap-highlight-color: transparent;
     }
 }
