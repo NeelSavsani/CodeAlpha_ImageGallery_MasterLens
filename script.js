@@ -219,6 +219,18 @@ function toggleTheme(event) {
     document.body.classList.toggle('light-mode');
 }
 
-function toggleMenu(){
-    document.getElementById("menu").classList.toggle("active");
+function toggleMenu() {
+    const menu = document.getElementById("menu");
+    const icon = document.querySelector(".hamburger i");
+
+    menu.classList.toggle("active");
+
+    // 🔥 toggle icon
+    if (menu.classList.contains("active")) {
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-xmark");
+    } else {
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-bars");
+    }
 }
