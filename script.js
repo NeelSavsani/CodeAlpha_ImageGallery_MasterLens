@@ -213,3 +213,8 @@ img.addEventListener("touchend", (e) => {
 
 // ================= INIT =================
 loadImages();
+
+function toggleTheme(event) {
+    event.preventDefault();
+    document.body.classList.toggle('light-mode');
+}

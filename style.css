@@ -1,10 +1,33 @@
+:root{
+    --header-dark: rgba(0,0,0,0.8);
+    --header-light: rgba(255, 255, 255, 0.8);
+    --header-shadow-dark: rgba(0,0,0,0.3);
+    --header-shadow-light: rgba(255,255,255,0.3);
+    --main-dark: #111;
+    --main-light: #eee;
+    --gallery-dark: #222;
+    --gallery-light: #ddd;
+    --text-white: #fff;
+    --text-dark: #000;
+    --preview-dark: rgba(0, 0, 0, 0.95);
+    --preview-light: rgba(255,255,255, 0.95);
+}
+
 body {
     margin: 0;
     font-family: Arial;
-    background: #111;
+    background: var(--main-dark);
 }
 
-/* 🔒 Disable scroll when preview open */
+body.light-mode{
+    background: var(--main-light);
+}
+
+/* Disable scroll when preview open */
+body.no-scroll .header {
+    display: none;
+}
+
 .no-scroll {
     overflow: hidden;
 }
@@ -15,8 +38,12 @@ body {
     column-gap: 10px;
     padding: 10px;
     margin: 40px;
-    background: #222;
+    background: var(--gallery-dark);
     border-radius: 8px;
+}
+
+.light-mode .gallery{
+    background: var(--gallery-light);
 }
 
 /* Tablets */
@@ -72,11 +99,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--preview-dark);
     display: none;
     justify-content: center;
     align-items: center;
+}
+
+.light-mode #preview{
+    background: var(--preview-light);
 }
 
 /* Image container */
@@ -94,10 +124,8 @@ body {
     max-width: 100%;
     max-height: 100%;
     border-radius: 10px;
-
     transform-origin: center;
     transition: transform 0.25s ease, opacity 0.25s ease;
-
     cursor: grab;
 }
 
@@ -111,8 +139,14 @@ body {
     top: 20px;
     right: 25px;
     font-size: 32px;
-    color: white;
+    color: var(--text-white);
     cursor: pointer;
+}
+
+.light-mode .close,
+.light-mode .nav,
+.light-mode .zoom-btn{
+    color: var(--text-dark);
 }
 
 .nav {
@@ -120,7 +154,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     font-size: 40px;
-    color: white;
+    color: var(--text-white);
     cursor: pointer;
     padding: 10px;
 }
@@ -137,12 +171,9 @@ body {
     position: absolute;
     bottom: 25px;
     right: 25px;
-
     font-size: 22px;
-    color: white;
+    color: var(--text-white);
     cursor: pointer;
-
-    background: rgba(0,0,0,0.6);
     padding: 12px;
     border-radius: 50%;
 }
