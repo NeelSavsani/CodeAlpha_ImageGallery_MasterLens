@@ -34,15 +34,45 @@ A modern and responsive Image Gallery Website built using HTML, CSS, and JavaScr
 <hr>
 <h3>📂 Project Structure</h3>
 <pre>
-├── index.html
-├── style.css
-├── header.css
-├── script.js
 ├── assets/
+│   ├── 11114091294_487e75e5ec_o.jpg
+│   ├── 15389508190_31b51e819b_k.jpg
+│   ├── 18579026941_707c5e524e_k.jpg
+│   ├── 233-2332463_lord-krishna-wallpapers-download-full-size-hd-facebook.jpg
+│   ├── 320986.jpg
+│   ├── 32736010994_ebe6aa9f78_o.jpg
+│   ├── 32736012704_dd2f6905ca_k.jpg
+│   ├── 32764885503_e958014edd_o.jpg
+│   ├── 32764887833_473e978b0c_o.jpg
+│   ├── 32764888633_4364089159_o.jpg
+│   ├── 32764888973_8c8a7ac1b7_o.jpg
+│   ├── 32764890623_eb0266176c_o.jpg
+│   ├── 32764893633_1e5e316eb0_o.jpg
+│   ├── 33195909430_70d023ea43_o.jpg
+│   ├── 33195910630_7f9777c021_o.jpg
+│   ├── 33422344522_a9a63b85e6_o.jpg
+│   ├── 33422346992_66e9a925a3_o.jpg
+│   ├── 50.jpg
+│   ├── 6052618.jpg
+│   ├── alexander-fastovets--zgAhmvWEc0-unsplash.jpg
+│   ├── alexander-fastovets-MgCZBzzvMEY-unsplash.jpg
+│   ├── animals-fantasy-2560x1600-lion-wallpaper-preview.jpg
+│   ├── BG-1.jpg
+│   ├── bg.jpg
 │   ├── favicon.ico
-│   ├── logo.png
-│   └── images/
-└── README.md
+│   ├── img1.jpg
+│   ├── img2.jpg
+│   ├── img3.jpg
+│   ├── img4.jpg
+│   ├── img5.jpg
+│   ├── img6.jpg
+│   ├── img7.jpg
+│   └── MasterEagle.png
+├── header.css
+├── index.html
+├── script.js
+└── style.css
+
 </pre>
 
 <hr>
